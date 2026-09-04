@@ -1,0 +1,28 @@
+﻿@page "/products"
+@rendermode InteractiveServer
+@using MalDar.Models
+
+
+<h3>لیست کالاها</h3>
+
+<ul>
+    @foreach (var item in _items)
+    {
+        <ProductRow Item="item" OnDelete="RemoveItem" />
+    }
+</ul>
+
+@code {
+    private readonly List<ProductItem> _items =
+    [
+        new ProductItem("برنج", 850000),
+        new ProductItem("روغن", 320000),
+        new ProductItem("قند", 150000)
+    ];
+
+    private void RemoveItem(ProductItem obj)
+    {
+        _items.Remove(obj);
+    }
+
+}

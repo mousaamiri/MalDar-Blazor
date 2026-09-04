@@ -1,0 +1,11 @@
+﻿@using MalDar.Models
+<li>
+    @Item.Name - @Item.Price.ToString("C") ریال
+    <button @onclick="HandleDeleteClick">حذف</button>
+</li>
+
+@code {
+    [Parameter] public ProductItem Item { get; set; } = null!;
+    [Parameter] public EventCallback<ProductItem> OnDelete { get; set; }
+    private Task HandleDeleteClick() => OnDelete.InvokeAsync(Item);
+}
