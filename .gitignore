@@ -1,0 +1,71 @@
+## .gitignore برای پروژه‌های Visual Studio / .NET
+
+# ===== Build results =====
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ll]og/
+[Ll]ogs/
+
+# ===== Visual Studio =====
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+
+# ===== ReSharper / Rider =====
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+.idea/
+
+# ===== NuGet =====
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# ===== Test results =====
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.trx
+*.coverage
+*.coveragexml
+
+# ===== Rider / VS Code =====
+.vscode/
+*.DotSettings
+
+# ===== OS files =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Publish / Deployment =====
+[Pp]ublish/
+*.publishsettings
+PublishScripts/
+*.azurePubxml
+
+# ===== ASP.NET / Blazor specific =====
+wwwroot/lib/
+*.pfx
+
+# ===== User-specific / secrets =====
+*.env
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
+secrets.json
+
+# ===== Misc =====
+*.tmp
+*.bak
+*.swp
+*~
