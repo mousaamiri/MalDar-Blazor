@@ -1,6 +1,6 @@
 ﻿@using MalDar.Models
 <li>
-    @Item.Name - @Item.Price.ToString("C") ریال
+    <a href="/products/@Item.Id">@Item.Name - @Item.Price.ToString("C") ریال</a>
     <button @onclick="HandleDeleteClick">حذف</button>
 </li>
 

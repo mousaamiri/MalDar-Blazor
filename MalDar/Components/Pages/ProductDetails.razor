@@ -1,0 +1,40 @@
+﻿@page "/products/{Id:int}"
+@rendermode @(new InteractiveServerRenderMode(prerender:false))
+@using MalDar.Models
+
+@if (_isloading)
+{
+    <p>در حال بارگذاری ...</p>
+}
+else if(_item is null)
+{
+    <p>کالایی با این شناسیه یافت نشد</p>
+}
+else
+{
+    <h3>@_item.Name</h3>
+    <p>قیمت: @_item.Price تومان</p>
+}
+<a href="/products">بازگشت به لیست</a>
+@code
+{
+    [Parameter] public int Id { get; set; }
+    private ProductItem? _item;
+    private bool _isloading = true;
+    protected override async Task OnInitializedAsync()
+    {
+        var items = await LoadItemsAsync();
+        _item = items.FirstOrDefault(i => i.Id == Id);
+        _isloading = false;
+    }
+    private async Task<List<ProductItem>> LoadItemsAsync()
+    {
+        await Task.Delay(2000);
+        return
+        [
+            new ProductItem(1,"برنج", 850000),
+            new ProductItem(2,"روغن", 320000),
+            new ProductItem(3,"قند", 150000)
+        ];
+    }
+}

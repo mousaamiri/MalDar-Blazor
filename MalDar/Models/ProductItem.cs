@@ -1,3 +1,3 @@
 ﻿namespace MalDar.Models;
 
-public record ProductItem(string Name, decimal Price);
+public record ProductItem(int Id,string Name, decimal Price);

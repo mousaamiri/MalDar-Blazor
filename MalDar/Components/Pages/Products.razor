@@ -1,37 +1,60 @@
 ﻿@page "/products"
-@rendermode InteractiveServer
+@rendermode @(new InteractiveServerRenderMode(prerender:false))
+@* Using PersistentComponentState Is Better way *@
 @using MalDar.Models
 
 
 <h3>لیست کالاها</h3>
-<div>
-    <input @bind="newName" @bind:event="oninput" placeholder="نام کالا"/>
-    <input @bind="newPrice" type="number" placeholder="قیمت"/>
-    <button @onclick="AddItem">افزودن</button>
-</div>
-<ul>
-    @foreach (var item in _items)
-    {
-        <ProductRow Item="item" OnDelete="RemoveItem" />
-    }
-</ul>
+@if (_isLoading)
+{
+    <p>در حال بارگذاری .... </p>
+}
+else
+{
+    <div>
+        <input @bind="_newName" @bind:event="oninput" placeholder="نام کالا"/>
+        <input @bind="_newPrice" type="number" placeholder="قیمت"/>
+        <button @onclick="AddItem">افزودن</button>
+    </div>
+    <ul>
+        @foreach (var item in _items)
+        {
+            <ProductRow Item="item" OnDelete="RemoveItem" />
+        }
+    </ul>
+}
 
 @code {
-    private readonly List<ProductItem> _items =
-    [
-        new ProductItem("برنج", 850000),
-        new ProductItem("روغن", 320000),
-        new ProductItem("قند", 150000)
-    ];
+    private List<ProductItem> _items = [];
 
-    private string newName = "";
-    private decimal newPrice;
+    private bool _isLoading=true;
+
+    private string _newName = "";
+    private decimal _newPrice;
+    protected override async Task OnInitializedAsync()
+    {
+        _isLoading = true;
+        _items = await LoadItemsAsync();
+        _isLoading = false;
+    }
+
+    private async Task<List<ProductItem>> LoadItemsAsync()
+    {
+        await Task.Delay(2000);
+        return
+        [
+            new ProductItem(1,"برنج", 850000),
+            new ProductItem(2,"روغن", 320000),
+            new ProductItem(3,"قند", 150000)
+        ];
+    }
     private void AddItem()
     {
-        if(string.IsNullOrEmpty(newName))return;
-        _items.Add(new ProductItem(newName, newPrice));
-        newName = "";
-        newPrice = 0;
+        if(string.IsNullOrEmpty(_newName))return;
+        var newId = _items.Count > 0 ? _items.Max(i => i.Id) : 1;
+        _items.Add(new ProductItem(newId,_newName, _newPrice));
+        _newName = "";
+        _newPrice = 0;
     }
     private void RemoveItem(ProductItem obj)
     {
