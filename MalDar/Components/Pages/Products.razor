@@ -4,7 +4,11 @@
 
 
 <h3>لیست کالاها</h3>
-
+<div>
+    <input @bind="newName" @bind:event="oninput" placeholder="نام کالا"/>
+    <input @bind="newPrice" type="number" placeholder="قیمت"/>
+    <button @onclick="AddItem">افزودن</button>
+</div>
 <ul>
     @foreach (var item in _items)
     {
@@ -20,9 +24,20 @@
         new ProductItem("قند", 150000)
     ];
 
+    private string newName = "";
+    private decimal newPrice;
+    private void AddItem()
+    {
+        if(string.IsNullOrEmpty(newName))return;
+        _items.Add(new ProductItem(newName, newPrice));
+        newName = "";
+        newPrice = 0;
+    }
     private void RemoveItem(ProductItem obj)
     {
         _items.Remove(obj);
     }
+
+    
 
 }
