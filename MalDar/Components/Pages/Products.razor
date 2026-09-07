@@ -1,7 +1,9 @@
 ﻿@page "/products"
+@inject IProductService ProductService
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
 @* Using PersistentComponentState Is Better way *@
 @using MalDar.Models
+@using MalDar.Services
 
 
 <h3>لیست کالاها</h3>
@@ -11,11 +13,14 @@
 }
 else
 {
-    <div>
-        <input @bind="_newName" @bind:event="oninput" placeholder="نام کالا"/>
-        <input @bind="_newPrice" type="number" placeholder="قیمت"/>
-        <button @onclick="AddItem">افزودن</button>
-    </div>
+    <EditForm Model="_newProduct" OnValidSubmit="AddItem">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+
+        <input @bind="_newProduct.Name" @bind:event="oninput" placeholder="نام کالا"/>
+        <input @bind="_newProduct.Price" type="number" placeholder="قیمت" />
+        <button type="submit" >افزودن</button>
+    </EditForm>
     <ul>
         @foreach (var item in _items)
         {
@@ -25,40 +30,29 @@ else
 }
 
 @code {
-    private List<ProductItem> _items = [];
 
     private bool _isLoading=true;
-
-    private string _newName = "";
-    private decimal _newPrice;
+    private List<ProductItem> _items = [];
+    private AddProductRequest _newProduct = new();
     protected override async Task OnInitializedAsync()
     {
         _isLoading = true;
-        _items = await LoadItemsAsync();
+        _items = await ProductService.GetAllProductsAsync();
         _isLoading = false;
     }
 
-    private async Task<List<ProductItem>> LoadItemsAsync()
+
+    private async Task AddItem()
     {
-        await Task.Delay(2000);
-        return
-        [
-            new ProductItem(1,"برنج", 850000),
-            new ProductItem(2,"روغن", 320000),
-            new ProductItem(3,"قند", 150000)
-        ];
+        if (string.IsNullOrEmpty(_newProduct.Name)) return;
+        var newProduct = await ProductService.AddProductAsync(_newProduct);
+        _items = await ProductService.GetAllProductsAsync();
+        _newProduct = new AddProductRequest();
     }
-    private void AddItem()
+    private async Task RemoveItem(ProductItem obj)
     {
-        if(string.IsNullOrEmpty(_newName))return;
-        var newId = _items.Count > 0 ? _items.Max(i => i.Id) : 1;
-        _items.Add(new ProductItem(newId,_newName, _newPrice));
-        _newName = "";
-        _newPrice = 0;
-    }
-    private void RemoveItem(ProductItem obj)
-    {
-        _items.Remove(obj);
+        await ProductService.RemoveProductAsync(obj.Id);
+        _items = await ProductService.GetAllProductsAsync();
     }
 
     
