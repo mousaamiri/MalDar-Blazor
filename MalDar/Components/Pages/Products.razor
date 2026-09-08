@@ -1,5 +1,5 @@
 ﻿@page "/products"
-@inject IProductService ProductService
+@inject ProductApiClient ApiClient
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
 @* Using PersistentComponentState Is Better way *@
 @using MalDar.Models
@@ -37,7 +37,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         _isLoading = true;
-        _items = await ProductService.GetAllProductsAsync();
+        _items = await ApiClient.GetAllAsync();
         _isLoading = false;
     }
 
@@ -45,14 +45,14 @@ else
     private async Task AddItem()
     {
         if (string.IsNullOrEmpty(_newProduct.Name)) return;
-        var newProduct = await ProductService.AddProductAsync(_newProduct);
-        _items = await ProductService.GetAllProductsAsync();
+        var newProduct = await ApiClient.AddAsync(_newProduct);
+        _items = await ApiClient.GetAllAsync();
         _newProduct = new AddProductRequest();
     }
     private async Task RemoveItem(ProductItem obj)
     {
-        await ProductService.RemoveProductAsync(obj.Id);
-        _items = await ProductService.GetAllProductsAsync();
+        await ApiClient.RemoveAsync(obj.Id);
+        _items = await ApiClient.GetAllAsync();
     }
 
     

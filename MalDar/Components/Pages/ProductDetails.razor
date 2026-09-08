@@ -1,5 +1,5 @@
 ﻿@page "/products/{Id:int}"
-@inject IProductService ProductService
+@inject ProductApiClient ApiClient
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
 @using MalDar.Models
 @using MalDar.Services
@@ -25,7 +25,7 @@ else
     private bool _isLoading = true;
     protected override async Task OnInitializedAsync()
     {
-        _item = await ProductService.GetProductByIdAsync(Id);
+        _item = await ApiClient.GetByIdAsync(Id);
         _isLoading = false;
     }
  
