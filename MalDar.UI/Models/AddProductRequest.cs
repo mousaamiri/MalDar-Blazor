@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MalDar.Models;
+namespace MalDar.UI.Models;
 
 public class AddProductRequest
 {

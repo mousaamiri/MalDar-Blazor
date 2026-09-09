@@ -1,5 +1,5 @@
-﻿using MalDar.Models;
-using MalDar.Services;
+﻿using MalDar.Services;
+using MalDar.UI.Models;
 
 namespace MalDar.Endpoints;
 

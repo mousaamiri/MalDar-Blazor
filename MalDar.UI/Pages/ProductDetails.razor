@@ -1,8 +1,8 @@
 ﻿@page "/products/{Id:int}"
+@using MalDar.UI.Models
+@using MalDar.UI.Services
 @inject ProductApiClient ApiClient
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
-@using MalDar.Models
-@using MalDar.Services
 
 @if (_isLoading)
 {

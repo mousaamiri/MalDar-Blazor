@@ -1,4 +1,4 @@
-﻿using MalDar.Models;
+﻿using MalDar.UI.Models;
 
 namespace MalDar.Services;
 

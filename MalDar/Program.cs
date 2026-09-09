@@ -1,6 +1,7 @@
 using MalDar.Components;
 using MalDar.Endpoints;
 using MalDar.Services;
+using MalDar.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +30,8 @@ app.UseAntiforgery();
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+    .AddInteractiveServerRenderMode()
+    .AddAdditionalAssemblies(typeof(MalDar.UI.Pages.Products).Assembly);
 
 app.MapProductEndpoints();
 

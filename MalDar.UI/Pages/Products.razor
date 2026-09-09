@@ -1,9 +1,10 @@
 ﻿@page "/products"
+@using MalDar.UI.Models
+@using MalDar.UI.Services
+@using Microsoft.AspNetCore.Components.Forms
 @inject ProductApiClient ApiClient
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
 @* Using PersistentComponentState Is Better way *@
-@using MalDar.Models
-@using MalDar.Services
 
 
 <h3>لیست کالاها</h3>

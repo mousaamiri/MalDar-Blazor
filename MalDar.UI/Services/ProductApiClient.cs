@@ -1,7 +1,7 @@
-﻿using MalDar.Models;
-using static System.Net.WebRequestMethods;
+﻿using System.Net.Http.Json;
+using MalDar.UI.Models;
 
-namespace MalDar.Services;
+namespace MalDar.UI.Services;
 
 public class ProductApiClient(HttpClient client)
 {

@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../MalDar.UI/MalDar.UI.csproj" Id="938d23ec-d1e5-400a-a457-1665eac0db6a" />
   <Project Path="MalDar.csproj" />
 </Solution>

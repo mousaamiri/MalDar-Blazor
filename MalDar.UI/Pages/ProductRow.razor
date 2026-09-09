@@ -1,4 +1,5 @@
-﻿@using MalDar.Models
+﻿@using MalDar.UI.Models
+@using Microsoft.JSInterop
 @inject IJSRuntime JS
 <li>
     <a href="/products/@Item.Id">@Item.Name - @Item.Price.ToString("C") ریال</a>
