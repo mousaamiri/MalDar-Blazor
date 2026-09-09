@@ -1,4 +1,5 @@
 ﻿@using MalDar.Models
+@inject IJSRuntime JS
 <li>
     <a href="/products/@Item.Id">@Item.Name - @Item.Price.ToString("C") ریال</a>
     <button @onclick="HandleDeleteClick">حذف</button>
@@ -7,5 +8,13 @@
 @code {
     [Parameter] public ProductItem Item { get; set; } = null!;
     [Parameter] public EventCallback<ProductItem> OnDelete { get; set; }
-    private Task HandleDeleteClick() => OnDelete.InvokeAsync(Item);
+
+    private async Task HandleDeleteClick()
+    {
+        var confirmed = await JS.InvokeAsync<bool>("productInterop.confirmDelete", Item.Name);
+        if (confirmed)
+        {
+            await OnDelete.InvokeAsync(Item);
+        }
+    }
 }
