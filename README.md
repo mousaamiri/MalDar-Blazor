@@ -1,54 +1,68 @@
 # MalDar
 
-> پروژه‌ای فقط و فقط برای تمرین و یادگیری مبانی **Blazor**
-
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## درباره‌ی پروژه
+<div dir="rtl">
 
-`MalDar` یک ریپازیتوری متن‌باز و کاملاً آموزشیه که فقط و فقط برای تمرین و یادگیری **مبانی Blazor** ساخته شده — بدون هیچ وابستگی به MAUI، بدون هیچ اپلیکیشن اندرویدی، و بدون هیچ منطق کسب‌وکاری واقعی. اینجا صرفاً محلی برای تمرین سرفصل‌های زیره.
+> ⚠️ این ریپازیتوری صرفاً برای **یادگیری و تمرین مبانی Blazor** ساخته شده است. سطح آن مقدماتی است و نباید به‌عنوان نمونه‌ای از معماری یا کد آماده‌ی تولید (production-grade) در نظر گرفته شود.
 
-## سرفصل‌های دوره‌ی مقدماتی
+## درباره
 
-| # | موضوع | توضیح |
-|---|-------|-------|
-| ۱ | اکوسیستم Blazor در .NET 10 | مدل‌های میزبانی: Blazor Server، Blazor WebAssembly، الگوی یکپارچه‌ی Blazor Web App (Static SSR / Interactive Server / Interactive WebAssembly / Auto)، و Blazor Hybrid |
-| ۲ | آناتومی یک پروژه‌ی Blazor | `Program.cs`، `App.razor`، `Routes.razor`، `MainLayout.razor`، `_Imports.razor`، `wwwroot` |
-| ۳ | کامپوننت‌ها — قلب Blazor | Razor syntax، Parameters، EventCallback، ترکیب کامپوننت‌ها (Composition)، Cascading Values/Parameters |
-| ۴ | Data Binding و رویدادها | `@bind`، `@bind:event`، `@bind:after`، `@onclick` و سایر event handler ها |
-| ۵ | چرخه‌ی حیات کامپوننت (Lifecycle) | `OnInitialized[Async]`، `OnParametersSet[Async]`، `OnAfterRender[Async]`، `IDisposable`/`IAsyncDisposable` |
-| ۶ | Routing و Navigation | `@page`، route parameters، `NavLink`، `NavigationManager` |
-| ۷ | فرم‌ها و اعتبارسنجی | `EditForm`، `DataAnnotationsValidator`، `InputText`/`InputNumber`/...، اعتبارسنجی سفارشی |
-| ۸ | Dependency Injection در Blazor | تفاوت رفتار DI بین Server/WASM/Hybrid |
-| ۹ | ارتباط با API | تنظیم `HttpClient`، فراخوانی API، مدیریت خطا و loading state |
-| ۱۰ | JS Interop (پایه) | `IJSRuntime`، فراخوانی جاوااسکریپت از C# و برعکس |
-| ۱۱ | Razor Class Library (RCL) | پل ارتباطی برای اشتراک‌گذاری UI بین یک پروژه‌ی وب و یک پروژه‌ی Hybrid |
-| ۱۲ | آشنایی مفهومی با Blazor Hybrid / BlazorWebView | مقدمه‌ای بر مکانیزمی که در MAUI استفاده می‌شه (پیاده‌سازی کامل، سرفصل دوره‌ی بعدیه) |
+`MalDar` یک ریپازیتوری آموزشی و متن‌باز است که به‌عنوان تمرین عملیِ دوره‌ی مقدماتی Blazor در .NET 10 ساخته شده. سناریوی تمرینی، مدیریت ساده‌ی کالاهای یک مغازه است و هدف اصلی، پیاده‌سازی گام‌به‌گام مفاهیم پایه‌ی Blazor — نه ارائه‌ی یک محصول واقعی — بوده است.
 
-## نقشه‌ی راه (دوره‌های بعدی)
+## سناریو و پیاده‌سازی
 
-**متوسط:** الگوهای مدیریت state (state container، Fluxor)، Authentication/Authorization، ترکیب render mode ها و پرفورمنس، تست کامپوننت با bUnit، SignalR/real-time، PWA
+ویژگی اصلیِ پیاده‌سازی‌شده، مدیریت کالاهاست: نمایش فهرست، افزودن کالای جدید، مشاهده‌ی جزئیات هر کالا، و حذف با دیالوگ تأیید. داده‌ها در یک سرویس درون‌حافظه‌ای روی همان پروژه‌ی میزبان نگهداری می‌شوند و از طریق چند Minimal API endpoint در اختیار UI قرار می‌گیرند.
 
-**پیشرفته:** JS Interop پیشرفته (JS modules، `JSObjectReference`)، معماری مشترک بین یک اپ وب و یک اپ MAUI Hybrid، CI/CD برای اپ‌های Hybrid، پرفورمنس پیشرفته (virtualization، استراتژی‌های prerendering)، دسترسی‌پذیری (accessibility)
+| # | موضوع | نحوه‌ی تمرین در MalDar |
+|---|-------|------------------------|
+| ۱ | اکوسیستم Blazor در .NET 10 | مدل Blazor Web App با Interactive Server render mode |
+| ۲ | آناتومی پروژه | `Program.cs`، `App.razor`، `Routes.razor`، `MainLayout.razor` در پروژه‌ی میزبان `MalDar` |
+| ۳ | کامپوننت‌ها | `Products`، `ProductDetails`، `ProductRow` در `MalDar.UI` |
+| ۴ | Parameters و EventCallback | `ProductRow` مقدار `Item` را به‌عنوان Parameter می‌گیرد و رویداد حذف را با `EventCallback` گزارش می‌دهد |
+| ۵ | Data Binding | `@bind` روی فرم افزودن کالا (`AddProductRequest`) |
+| ۶ | Lifecycle | `OnInitializedAsync` برای بارگذاری فهرست و جزئیات کالا |
+| ۷ | Routing | `@page "/products"` و `@page "/products/{Id:int}"` |
+| ۸ | فرم و اعتبارسنجی | `EditForm` + `DataAnnotationsValidator` روی `AddProductRequest` |
+| ۹ | Dependency Injection | ثبت `IProductService` و `ProductApiClient` در `Program.cs` |
+| ۱۰ | ارتباط با API | `ProductApiClient` با `HttpClient` واقعی به endpoint های `/api/products` |
+| ۱۱ | JS Interop | تأیید حذف کالا از طریق `productInterop.confirmDelete` |
+| ۱۲ | Razor Class Library | جداسازی کامل UI کالاها به پروژه‌ی `MalDar.UI` — پیش‌نیاز مستقیم فاز MAUI |
 
-## پیش‌نیازها
+## مفاهیم کلیدی
 
-- [.NET 10 SDK](https://dotnet.microsoft.com/download)
-- Visual Studio 2022+ (یا VS Code با افزونه‌ی C# Dev Kit)
+- کامپوننت‌سازی و ترکیب کامپوننت‌ها (`Products` ← `ProductRow`)
+- تفکیک UI قابل‌اشتراک (`MalDar.UI`) از پروژه‌ی میزبان (`MalDar`) با Razor Class Library
+- اتصال به یک API واقعی به‌جای داده‌ی ثابت
+- استفاده‌ی هدفمند از JS Interop برای یک نیاز واقعی (تأیید حذف)، نه صرفاً یک مثال جدا
 
-## اجرای پروژه
+## نتایج
 
-```bash
-git clone https://github.com/mousaamiri/MalDar.git
-cd MalDar
-dotnet run
-```
+- پروژه‌ی میزبان `MalDar` (.NET 10، Interactive Server) اجرا می‌شود؛ صفحات پیش‌فرض قالب (`Home`، `Counter`، `Weather`) همچنان باقی‌مانده‌اند و بخشی از سناریوی تمرین نیستند.
+- ویژگی محصولات (`/products` و `/products/{id}`) کامل کار می‌کند: نمایش، افزودن، حذف با تأیید، مشاهده‌ی جزئیات.
+- `MalDar.UI` آماده‌ی reference مستقیم توسط یک پروژه‌ی MAUI Blazor Hybrid است — گام بعدی دوره (به مخزن جداگانه‌ی MAUI مراجعه شود).
+
+## یادداشت‌ها
+
+- **پیش‌نیازها:** [.NET 10 SDK](https://dotnet.microsoft.com/download)، Visual Studio 2022+ (یا VS Code + C# Dev Kit).
+- **اجرا:**
+  ```bash
+  git clone https://github.com/mousaamiri/MalDar-Blazor.git
+  cd MalDar-Blazor/MalDar
+  dotnet run
+  ```
+- فایل solution (`MalDar.slnx`) داخل پوشه‌ی `MalDar` قرار دارد، نه در ریشه‌ی ریپازیتوری.
+- در `MalDar.UI`، فایل‌های `Component1.razor` و `ExampleJsInterop.cs` باقی‌مانده‌ی اسکفولد پیش‌فرض RCL هستند، در هیچ‌جای اپ استفاده نمی‌شوند و حذف‌شان بی‌خطر است.
+- در ریشه‌ی ریپازیتوری یک پوشه‌ی ناخواسته با نامی شامل کاراکتر بک‌تیک وجود دارد (به‌همراه یک فایل خالیِ `Products.razor` با نام مشابه داخلش) که ظاهراً به‌اشتباه در ترمینال ساخته و کامیت شده؛ پیشنهاد می‌شود از ریپازیتوری حذف شود.
+- **ادامه‌ی دوره:** ساخت اپ موبایل با MAUI Blazor Hybrid که مستقیماً `MalDar.UI` را reference می‌دهد — مستندات آن در README پروژه‌ی جدید آمده است.
 
 ## لایسنس
 
-این پروژه تحت لایسنس [MIT](./LICENSE) منتشر شده.
+این پروژه تحت لایسنس [MIT](./LICENSE) منتشر شده است.
 
 ## نویسنده
 
 **Mousa Amiri Motlagh**
 [github.com/mousaamiri](https://github.com/mousaamiri)
+
+</div>
