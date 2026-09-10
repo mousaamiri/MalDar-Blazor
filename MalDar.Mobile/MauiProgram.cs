@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-
+using MalDar.UI.Services;
 namespace MalDar.Mobile
 {
     public static class MauiProgram
@@ -15,6 +15,10 @@ namespace MalDar.Mobile
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddHttpClient<ProductApiClient>(httpClient =>
+            {
+                httpClient.BaseAddress = new Uri("https://localhost:7149");
+            });
 
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();
