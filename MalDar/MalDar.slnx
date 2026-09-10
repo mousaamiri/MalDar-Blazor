@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="../MalDar.Mobile/MalDar.Mobile.csproj" Id="80867310-5577-4309-8b55-49e12e7adc8e" />
   <Project Path="../MalDar.UI/MalDar.UI.csproj" Id="938d23ec-d1e5-400a-a457-1665eac0db6a" />
   <Project Path="MalDar.csproj" />
 </Solution>
